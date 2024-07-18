@@ -1,8 +1,27 @@
 import "primeflex/primeflex.css"
 import "primeicons/primeicons.css"
 import "primereact/resources/themes/viva-light/theme.css"
+import { useState } from "react"
+import { useEffect } from "react"
+import { API } from "../services"
 
 const Home = () => {
+
+    //CRIANDO UM USESTATE PARA GUARDAR OS PRODUTOS VINDO DA API - PARA SER UTILIZADA NA FUNÇÃO
+    const [produtos, setProdutos] = useState([]);
+
+    //FUNÇÃO VAI RECEBER OS PRODUTOS DA API
+    async function buscarProdutos(){//quando for utilizar um await, sua funcção tem que ser async
+        const requisicao = await API.get('/products');
+        console.log(requisicao);//verifica se está retornando os valores do endpoint
+        setProdutos(requisicao.data);
+    }
+
+    //CRIANDO A REQUISIÇÃO PARA A API - USEEFFECT
+    useEffect(() => {
+        buscarProdutos();
+    }, [])//SE DEIXARMOS O ARRAY DE DEPENDENCIAS VAZIO, O QUE ESTÁ DENTRO DO CORPO DO USEEFECT SÓ ACONTECE UMA VEZ, QUE É QUANDO O COMPONENTE É RENDERIZADO
+
     return ( 
         <>
             <section className="overflow-hidden px-5">
