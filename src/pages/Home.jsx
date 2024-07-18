@@ -28,31 +28,23 @@ const Home = () => {
                 <h1>Lista de produtos</h1>
 
                 <ul className="grid p-0 list-none">
-
-                    <li className="col-12 md:col-3 ">
-                        <div className="shadow-5 p-3 border-round-md">
-                        <div className="relative">
-                            <img className="w-full" src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="bolsa" /> 
-                            <h6 className="absolute top-0 right-0 bg-primary py-1 px-2 border-round-md">4.5</h6>
-                        </div>
-                            <h3 className="mb-0 ">Produto: </h3>
-                            <h6 className="mt-1 text-primary uppercase">Categoria: </h6>
-                            <h2 className="mb-0">Preço: R$ 00.00</h2>
-                        </div>
-                    </li>
-                    <li className="col-12 md:col-3 ">
-                        <div className="bg-red-500">produto2</div> 
-                    </li>
-                    <li className="col-12 md:col-3 ">
-                        <div className="bg-red-500">produto3</div> 
-                    </li>
-                    <li className="col-12 md:col-3 ">
-                        <div className="bg-red-500">produto4</div> 
-                    </li>
-                    <li className="col-12 md:col-3 ">
-                        <div className="bg-red-500">produto5</div> 
-                    </li>    
-
+                    {
+                        produtos.map((produtos) => (
+                            <li className="col-12 md:col-3 ">
+                            <div className="shadow-6 p-3 border-round-md">
+                            <div className="relative">
+                                    <img className="w-full" 
+                                    style={{height: "300px", objectFit: 'contain'}} 
+                                    src={produtos.image} alt="bolsa" /> 
+                                <h6 className="absolute top-0 right-0 bg-primary py-1 px-2 border-round-md">{produtos.rating.rate}</h6>
+                            </div>
+                                <h3 className="mb-0 white-space-nowrap overflow-hidden text-overflow-ellipsis">{produtos.title}: </h3>
+                                <h6 className="mt-1 text-primary uppercase">Categoria: {produtos.category}</h6>
+                                <h2 className="mb-0">Preço: R$ {produtos.price}</h2>
+                            </div>
+                            </li>
+                        ))
+                    }
                 </ul>    
             </section>  
         </>
